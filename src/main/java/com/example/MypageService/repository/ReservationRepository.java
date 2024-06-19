@@ -11,4 +11,7 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     @Query("SELECT h FROM Reservation h WHERE h.userId = :userId")
     List<Reservation> findByUserId(@Param("userId") String userId);
+
+    long countByHpidAndConfirmed(String hpid, boolean confirmed);
+
 }

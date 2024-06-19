@@ -5,6 +5,7 @@ import com.example.MypageService.dto.FavoriteHospitalResponse;
 import com.example.MypageService.dto.FavoriteHospitalWithCountResponse;
 import com.example.MypageService.entity.FavoriteHospital;
 import com.example.MypageService.repository.FavoriteHospitalRepository;
+import com.example.MypageService.repository.ReservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
