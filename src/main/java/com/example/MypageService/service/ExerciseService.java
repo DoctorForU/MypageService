@@ -19,18 +19,29 @@ public class ExerciseService {
     private ExerciseRepository exerciseRepository;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-//    public GetTotalInfo getExercise(GetExerciseRequest getExerciseRequest){ // 대시보드 운동 항목
-//
-//        return exerciseRepository.toResponseList(userHealthList);
-//    }
-//
-//    public List<ExerciseResponse> getExerciseList(GetExerciseRequest GetExerciseRequest){
-//        List<Exercise> exerciseList = exerciseRepository.getExercisesByUserIdAndDate(GetExerciseRequest.get);
-//        return ExerciseConverter.toResponseList(userHealthList);
-//    }
-//    public List<Exercise> getExercisesByUserIdAndDate(GetExerciseRequest getExerciseRequest) {
-//        return exerciseRepository.findByUserIdAndCreatAt(getExerciseRequest.getUserId(), getExerciseRequest.getSelectedDate());
-//    }
+
+    public GetTotalInfo getExerciseStatsByUserIdAndDate(GetExerciseRequest getExerciseRequest) { // 대시보드에 총 운동시간, 총 운동 개수, 총 중량을 받아오는 서비스
+        List<Exercise> exercises = exerciseRepository.findByUserIdAndCreatAt(getExerciseRequest.getUserId(), getExerciseRequest.getSelectedDate());
+        Duration totalDuration = Duration.ZERO;
+        int totalCount = exercises.size();
+        int totalWeight = 0;
+
+        for (Exercise exercise : exercises) {
+            totalDuration = totalDuration.plus(exercise.getExerciseDuration());
+            totalWeight += exercise.getExerciseWeight() != null && exercise.getExerciseSets() != null ? exercise.getExerciseWeight() * exercise.getExerciseSets() : 0;
+        }
+
+        logger.info("In Service totalDuration: " +  totalDuration);
+        logger.info("In Service totalCount: " +  totalCount);
+        logger.info("In Service totalWeight: " +  totalWeight);
+
+        String totalDurationInMinutes = String.valueOf(totalDuration.toMinutes());
+        logger.info("In Service totalDurationInMinutes: " +  totalDurationInMinutes);
+
+        return new GetTotalInfo(totalDurationInMinutes, totalCount, totalWeight);
+    }
+
+
 
     public List<GetExerciseResponse> getExercisesByUserIdAndDate(GetExerciseRequest getExerciseRequest) {
         List<Exercise> exercises = exerciseRepository.findByUserIdAndCreatAt(getExerciseRequest.getUserId(), getExerciseRequest.getSelectedDate());
@@ -63,14 +74,14 @@ public class ExerciseService {
         exerciseRepository.saveAll(exercises);
     }
 
-    public Duration getTotalExerciseDuration() {
-        List<Exercise> exercises = exerciseRepository.findAll();
-        Duration totalDuration = Duration.ZERO;
-
-        for (Exercise exercise : exercises) {
-            totalDuration = totalDuration.plus(exercise.getExerciseDuration());
-        }
-
-        return totalDuration;
-    }
+//    public Duration getTotalExerciseDuration() {
+//        List<Exercise> exercises = exerciseRepository.findAll();
+//        Duration totalDuration = Duration.ZERO;
+//
+//        for (Exercise exercise : exercises) {
+//            totalDuration = totalDuration.plus(exercise.getExerciseDuration());
+//        }
+//
+//        return totalDuration;
+//    }
 }
