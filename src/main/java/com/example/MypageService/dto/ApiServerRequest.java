@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class ApiServerRequest {
     private String userIdentity; // 프론트 받아와야 함
     private String token; // doctorforUdb - table Root -> access, refresh, organizationName, organizationEmail, organizationPW
+    // date 두개 더 온다는 거
 
 }

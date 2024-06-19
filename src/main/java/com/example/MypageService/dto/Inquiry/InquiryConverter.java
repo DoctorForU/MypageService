@@ -1,7 +1,5 @@
-package com.example.MypageService.dto;
+package com.example.MypageService.dto.Inquiry;
 
-import com.example.MypageService.dto.health.HealthResponse;
-import com.example.MypageService.entity.HealthCare;
 import com.example.MypageService.entity.Inquiry;
 
 import java.util.List;

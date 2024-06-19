@@ -1,12 +1,9 @@
 package com.example.MypageService.service;
 
-import com.example.MypageService.dto.InquiryConverter;
-import com.example.MypageService.dto.InquiryResponse;
-import com.example.MypageService.dto.health.HealthCareConverter;
-import com.example.MypageService.dto.health.HealthResponse;
+import com.example.MypageService.dto.Inquiry.InquiryConverter;
+import com.example.MypageService.dto.Inquiry.InquiryResponse;
 import com.example.MypageService.entity.HealthCare;
 import com.example.MypageService.entity.Inquiry;
-import com.example.MypageService.repository.HealthCareRepository;
 import com.example.MypageService.repository.InquiryRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,5 +23,16 @@ public class InquiryService {
     public List<InquiryResponse> getInquiry(String userId) {
         List<Inquiry> inquiryList = inquiryRepository.findByUserId(userId);
         return InquiryConverter.toResponseList(inquiryList);
+    }
+
+    public void registerInquiry(Inquiry inquiry) {
+        Inquiry newInquiry = new Inquiry(
+                inquiry.getUserId(),
+                inquiry.getTitle(),
+                inquiry.getContent()
+        );
+
+        logger.info("newInquiry: " + newInquiry);
+        inquiryRepository.save(newInquiry);
     }
 }

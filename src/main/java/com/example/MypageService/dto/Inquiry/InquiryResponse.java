@@ -1,4 +1,4 @@
-package com.example.MypageService.dto;
+package com.example.MypageService.dto.Inquiry;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
