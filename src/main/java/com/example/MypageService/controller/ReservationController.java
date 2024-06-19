@@ -21,7 +21,7 @@ public class ReservationController {
     private final ReservationService reservationService;
     private static final Logger logger = LoggerFactory.getLogger(HealthCareController.class);
 
-    @GetMapping("reservation")
+    @GetMapping("/reservation") //
     public List<ReservationResponse> getReservation(@RequestBody Reservation reservation){
         logger.info("userId: " + reservation.getUserId());
 
@@ -30,8 +30,8 @@ public class ReservationController {
 
     @PostMapping("/reservation/register")
     public CommonResponse<String> registerReservation(@RequestBody ReservationRequest reservationRequest){
-        logger.info("userId: " + reservationRequest.getUserId() + "reserveTime: " + reservationRequest.getReserveTime());
-
+        logger.info("userId: " + reservationRequest.getUserId() + " reserveTime: " + reservationRequest.getReserveTime());
+        logger.info("getReserveDate: " + reservationRequest.getReserveDate() + " getDutyName: " + reservationRequest.getDutyName());
         reservationService.registerReservation(reservationRequest);
         return CommonResponse.ok("예약 완료");
     }

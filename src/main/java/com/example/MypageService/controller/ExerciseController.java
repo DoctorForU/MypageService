@@ -31,6 +31,11 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseService.getExercisesByUserIdAndDate(getExerciseRequest));
     }
 
+//    @PostMapping ("/exercise/dashboard") // mypage키지마자 대시보드에 뜨는 전체 운동시간, 전체 운동개수, 전체 중량을 보내주는 컨트롤러
+//    public  ResponseEntity<List<GetExerciseResponse>> getExercise (@RequestBody GetExerciseRequest getExerciseRequest){
+//        return ResponseEntity.ok(exerciseService.getExercisesByUserIdAndDate(getExerciseRequest));
+//    }
+
     @PostMapping ("/exercise/register")
     public CommonResponse<String> registerExercise (@RequestBody List<RegisterExerciseRequest> registerExerciseRequests){
         logger.info(registerExerciseRequests.toString());

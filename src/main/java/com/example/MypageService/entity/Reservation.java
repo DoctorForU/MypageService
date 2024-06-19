@@ -34,19 +34,19 @@ public class Reservation {
     private LocalDate reserveDate;
 
     @Column(name = "reserve_time", nullable = false)
-    private LocalDateTime reserveTime;
+    private String reserveTime;
 
     public Reservation(String userId, String hpid, String dutyName, String date, String time){
         DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH-mm");
         LocalDate reserveDate = LocalDate.parse(date.toString(), formatterDate);
-        LocalDateTime reserveTime = LocalDateTime.parse(time.toString(), formatterTime);
+        //LocalDateTime reserveTime = LocalDateTime.parse(time.toString(), formatterTime);
 
 
         this.userId = userId;
         this.hpid = hpid;
         this.dutyName = dutyName;
         this.reserveDate = reserveDate;
-        this.reserveTime = reserveTime;
+        //this.reserveTime = reserveTime;
     }
 }

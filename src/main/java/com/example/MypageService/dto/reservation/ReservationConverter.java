@@ -14,7 +14,7 @@ public class ReservationConverter {
                 .hpid(reservation.getHpid())
                 .dutyName(reservation.getDutyName())
                 .reserveDate(reservation.getReserveDate())
-                .reserveTime(reservation.getReserveTime())
+                //.reserveTime(reservation.getReserveTime()) ????
                 .build();
     }
 

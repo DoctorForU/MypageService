@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,13 +31,17 @@ public class ReservationService {
     }
 
     public void registerReservation(ReservationRequest reservationRequest) {
-        Reservation newReservation = new Reservation(
-                reservationRequest.getUserId(),
-                reservationRequest.getHpid(),
-                reservationRequest.getDutyName(),
-                reservationRequest.getReserveDate(),
-                reservationRequest.getReserveTime()
-        );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate reserveDate = LocalDate.parse(reservationRequest.getReserveDate(), formatter);
+        logger.info("after format");
+        Reservation newReservation = new Reservation();
+
+        newReservation.setUserId(reservationRequest.getUserId());
+        newReservation.setHpid(reservationRequest.getHpid());
+        newReservation.setDutyName(reservationRequest.getDutyName());
+        newReservation.setReserveDate(reserveDate);
+        newReservation.setReserveTime(reservationRequest.getReserveTime());
+
 
         logger.info("newReservation: " + newReservation);
         reservationRepository.save(newReservation);
