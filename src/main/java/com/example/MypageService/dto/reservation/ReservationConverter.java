@@ -11,10 +11,11 @@ import java.util.stream.Collectors;
 public class ReservationConverter {
     public static ReservationResponse toResponse(Reservation reservation) {
         return ReservationResponse.builder()
+                .id(reservation.getId())
                 .hpid(reservation.getHpid())
                 .dutyName(reservation.getDutyName())
                 .reserveDate(reservation.getReserveDate())
-                //.reserveTime(reservation.getReserveTime()) ????
+                .reserveTime(reservation.getReserveTime())
                 .build();
     }
 

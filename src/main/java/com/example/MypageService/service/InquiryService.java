@@ -1,5 +1,6 @@
 package com.example.MypageService.service;
 
+import com.example.MypageService.dto.Inquiry.GetInquiryRequest;
 import com.example.MypageService.dto.Inquiry.InquiryConverter;
 import com.example.MypageService.dto.Inquiry.InquiryResponse;
 import com.example.MypageService.entity.HealthCare;
@@ -20,8 +21,8 @@ public class InquiryService {
     private InquiryRepository inquiryRepository;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    public List<InquiryResponse> getInquiry(String userId) {
-        List<Inquiry> inquiryList = inquiryRepository.findByUserId(userId);
+    public List<InquiryResponse> getInquiry(GetInquiryRequest getInquiryRequest) {
+        List<Inquiry> inquiryList = inquiryRepository.findByUserId(getInquiryRequest.getUserId());
         return InquiryConverter.toResponseList(inquiryList);
     }
 

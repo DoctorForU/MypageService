@@ -3,7 +3,7 @@ package com.example.MypageService.dto.reservation;
 import lombok.Data;
 
 @Data
-public class ReservationRequest {
+public class RegisterReservationRequest {
     private String userId; // 유저 ID -> 세션
     private String hpid; // 병원코드
     private String dutyName; // 병원이름

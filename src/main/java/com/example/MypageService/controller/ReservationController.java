@@ -1,7 +1,8 @@
 package com.example.MypageService.controller;
 
 import com.example.MypageService.api.CommonResponse;
-import com.example.MypageService.dto.reservation.ReservationRequest;
+import com.example.MypageService.dto.reservation.GetReservationRequest;
+import com.example.MypageService.dto.reservation.RegisterReservationRequest;
 import com.example.MypageService.dto.reservation.ReservationResponse;
 import com.example.MypageService.entity.Reservation;
 import com.example.MypageService.service.ReservationService;
@@ -19,17 +20,17 @@ import java.util.List;
 @RequestMapping("/mypage-service")
 public class ReservationController {
     private final ReservationService reservationService;
-    private static final Logger logger = LoggerFactory.getLogger(HealthCareController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReservationController.class);
 
-    @GetMapping("/reservation") //
-    public List<ReservationResponse> getReservation(@RequestBody Reservation reservation){
-        logger.info("userId: " + reservation.getUserId());
+    @PostMapping("/reservation/get") // 유저가 등록한 예약 내역
+    public List<ReservationResponse> postToGetReservation(@RequestBody GetReservationRequest getReservationRequest){
+        logger.info("userId: " + getReservationRequest.getUserId());
 
-        return reservationService.getReservation(reservation);
+        return reservationService.getReservation(getReservationRequest);
     }
 
     @PostMapping("/reservation/register")
-    public CommonResponse<String> registerReservation(@RequestBody ReservationRequest reservationRequest){
+    public CommonResponse<String> registerReservation(@RequestBody RegisterReservationRequest reservationRequest){
         logger.info("userId: " + reservationRequest.getUserId() + " reserveTime: " + reservationRequest.getReserveTime());
         logger.info("getReserveDate: " + reservationRequest.getReserveDate() + " getDutyName: " + reservationRequest.getDutyName());
         reservationService.registerReservation(reservationRequest);
@@ -37,7 +38,8 @@ public class ReservationController {
     }
 
     @DeleteMapping("/reservation/{reservationId}")
-    public CommonResponse<String> deleteReservation(@PathVariable Long reservationId) {
+    public CommonResponse<String> deleteReservation(@PathVariable String reservationId ) {
+        logger.info("reservation id: " + reservationId);
         reservationService.deleteReservation(reservationId);
         return CommonResponse.ok("예약 취소 완료");
     }
