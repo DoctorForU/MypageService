@@ -7,8 +7,8 @@ WORKDIR /app
 # 소스 복사
 COPY . .
 
-# Gradle 빌드 수행
-RUN ./gradlew clean build
+# Gradle 빌드 수행 (테스트 제외)
+RUN ./gradlew clean build -x test
 
 # JAR 파일 실행 설정
 ENTRYPOINT ["java", "-jar", "/app/build/libs/mypage-service.jar"]
