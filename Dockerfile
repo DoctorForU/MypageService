@@ -11,4 +11,4 @@ COPY . .
 RUN ./gradlew clean build -x test
 
 # JAR 파일 실행 설정
-ENTRYPOINT ["java", "-jar", "/app/build/libs/mypage-service.jar"]
+ENTRYPOINT ["java", "-jar", "/app/build/libs/MypageService-0.0.1-SNAPSHOT.jar"]
