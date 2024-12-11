@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "EasyResponseClient", url = "${EasyResponse.service.url}")
+@FeignClient(name = "EasyResponseClient", url = "http://eureka-container:8888")
 public interface EasyResponseClient {
     @PostMapping("/api/v1/treat/getTreat")
     ResponseEntity<List<TreatResponse>> getTreat(@RequestBody ApiServerRequest treatRequest);
