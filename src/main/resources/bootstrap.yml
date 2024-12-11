@@ -2,6 +2,6 @@ spring:
   cloud:
     config:
       uri: http://eureka-container:8888
-      name: mypage
+      name: user
   profiles:
     active: dev
